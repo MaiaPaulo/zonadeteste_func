@@ -15,7 +15,7 @@ FROM
    
 
 	(SELECT 
-     sub.fid, sub.cobacia, sub.cocursodag, sub.dn, sub.q_q95espjan, sub.q_q95espfev,
+     sub.fid, sub.cobacia, sub.cocursodag, sub.dn, sub.q_q95espjan, sub.q_q95espfev, sub.q_q95espano,
      ST_Distance(sub.geom, ST_Transform (d.geometry, 3857)) As act_dist
      FROM subtrechos1 AS sub, otto_minibacias_pol_100k AS mini, durhs_filtradas_completas AS d
      WHERE d.numerodurh = '{numerodurh}' AND
@@ -37,5 +37,8 @@ FROM
     print(data)
     return data
 
+
 data = asyncio.get_event_loop().run_until_complete(main())
 # DURH033029
+
+
