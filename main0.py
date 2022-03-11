@@ -84,11 +84,11 @@ def ConOutorgasAMontante(location,durhs,cnarh40,subtrechos):
   filter_trec_princ = gpd.sjoin_nearest(filter_trec_princ, subtrechos, how='inner')
   sel_trec_princ = (filter_teste.loc[filter_teste['trecho_princ'] == 1]) #seleção cnarh interna para trecho principal
   merge_all_cnarh = pd.concat([sel_trec_princ,sel_cnarh_externo])
-  dados_cnarh = merge_all_cnarh.loc[:,('INT_CD_CNARH40','EMP_NM_EMPREENDIMENTO','EMP_NM_USUARIO',
-                                       'EMP_NU_CPFCNPJ','EMP_DS_EMAILRESPONSAVEL','EMP_NU_CEPENDERECO',
-                                       'EMP_CD_IBGEMUNCORRESPONDENCIA','EMP_DS_LOGRADOURO','EMP_DS_COMPLEMENTOENDERECO',
-                                       'EMP_NU_LOGRADOURO','EMP_NU_CAIXAPOSTAL','EMP_DS_BAIRRO','EMP_NU_DDD','EMP_NU_TELEFONE',
-                                       'EMP_SG_UF','EMP_NM_MUNICIPIO')]
+  dados_cnarh = merge_all_cnarh.loc[:,('INT_CD_CNARH40', 'EMP_NM_EMPREENDIMENTO', 'EMP_NM_USUARIO',
+                                       'EMP_NU_CPFCNPJ', 'EMP_DS_EMAILRESPONSAVEL', 'EMP_NU_CEPENDERECO',
+                                       'EMP_CD_IBGEMUNCORRESPONDENCIA', 'EMP_DS_LOGRADOURO', 'EMP_DS_COMPLEMENTOENDERECO',
+                                       'EMP_NU_LOGRADOURO', 'EMP_NU_CAIXAPOSTAL', 'EMP_DS_BAIRRO', 'EMP_NU_DDD', 'EMP_NU_TELEFONE',
+                                       'EMP_SG_UF', 'EMP_NM_MUNICIPIO')]
   return dados_cnarh
 
 # CONSULTA DE VAZOES DAS OUTORGAS À MONTANTE
@@ -297,11 +297,6 @@ def VazDurhsDif(location, subtrechos, durhs):
                            index=['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'])
     return dfdurhs
 
-# função inicial para rodar a localização
-def run(numero_durh):
-  numero_durh = numero_durh
-  location = getlocation(numero_durh,durhs,subtrechos)
-  return numero_durh,location
 
 # Após passar no critério de localização, a função de análise é executada
 def analise(location):
@@ -341,6 +336,12 @@ def getlocation(numero_durh,durhs,subtrechos):
     print("Subtrecho fora de barragem/massa d'agua")
     analise(location)
   return
+
+# função inicial para rodar a localização
+def run(numero_durh):
+  numero_durh = numero_durh
+  location = getlocation(numero_durh,durhs,subtrechos)
+  return numero_durh,location
 
 # DURH004462 -> ok || DURH030728 -> não passa
 # Criação da interface gráfica
